@@ -85,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances"""
         if not arg:
             print([str(obj) for obj in storage.all().values()])
-        elif arg in storage.classes():
+        elif arg in storage.all():
             print([str(obj) for key, obj in storage.all().items() if arg in key])
         else:
             print("** class doesn't exist **")
