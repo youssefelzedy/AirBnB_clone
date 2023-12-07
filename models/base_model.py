@@ -5,10 +5,11 @@ import uuid
 from datetime import datetime
 import json
 import models
+import cmd
 
 timedate = '%Y-%m-%dT%H:%M:%S.%f'
 
-class BaseModel:
+class BaseModel(cmd.Cmd):
     ''' BaseModel Class'''
     def __init__(self, *args, **kwargs):
         '''public instance Constructor '''
