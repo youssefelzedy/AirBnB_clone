@@ -8,6 +8,7 @@ import cmd
 
 timedate = '%Y-%m-%dT%H:%M:%S.%f'
 
+
 class BaseModel(cmd.Cmd):
     ''' BaseModel Class'''
     def __init__(self, *args, **kwargs):
@@ -24,11 +25,10 @@ class BaseModel(cmd.Cmd):
             self.updated_at = datetime.now()
             models.storage.new(self)
 
-    
     def __str__(self):
         ''' __str_method '''
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__,
-                                self.id, self.__dict__)
+                                         self.id, self.__dict__)
 
     def save(self):
         ''' save method '''
