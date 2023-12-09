@@ -21,9 +21,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """
-        Handles EOF (Ctrl+D) to exit the program
-        """
+        """Handles EOF (Ctrl+D) to exit the program"""
         print()  # Print a new line before exiting
         return True
 
@@ -32,9 +30,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """
-        Creates a new instance of BaseModel, saves it, and prints the id
-        """
+        """Creates a new instance of BaseModel, saves it, and prints the id"""
         args = shlex.split(arg)
         if len(args) == 0:
             print("** class name missing **")
@@ -49,9 +45,7 @@ class HBNBCommand(cmd.Cmd):
         models.storage.save()
 
     def do_show(self, arg):
-        """
-        Prints the string representation of an instance
-        """
+        """Prints the string representation of an instance"""
         args = shlex.split(arg)
         obj_dict = models.storage.all()
         if len(args) == 0:
@@ -69,9 +63,7 @@ class HBNBCommand(cmd.Cmd):
         print(obj_dict[args[0] + '.' + args[1]])
 
     def do_destroy(self, arg):
-        """
-        Deletes an instance based on the class name and id
-        """
+        """Deletes an instance based on the class name and id"""
         args = shlex.split(arg)
         obj_dict = models.storage.all()
         if len(args) == 0:
@@ -90,9 +82,7 @@ class HBNBCommand(cmd.Cmd):
         models.storage.save()
 
     def do_all(self, arg):
-        """
-        Prints all string representation of all instances
-        """
+        """Prints all string representation of all instances"""
         args = shlex.split(arg)
         if len(args) != 0 and args[0] not in models.classes_dict:
             print("** class doesn't exist **")
