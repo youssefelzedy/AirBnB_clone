@@ -14,9 +14,6 @@ class Testcity(unittest.TestCase):
     unittests for city class
     """
 
-class TestCity(unittest.TestCase):
-    """Unittest for testing the City class."""
-
     def setUp(self):
         self.model = City()
         self.model_dict = self.model.to_dict()
