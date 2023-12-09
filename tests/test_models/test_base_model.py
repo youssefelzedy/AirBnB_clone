@@ -164,7 +164,7 @@ class TestBaseModel(unittest.TestCase):
     def test_creation_from_dictionary_advancedx3(self):
         """ This function proves that when passing a dictionary with\
             extra attributes and with spaces in those of type string,\
-            these are added correctly """
+        """
         date = datetime.now()
         dic = {"id": "7734cf23-6c89-4662-8483-284727324c77", "created_at":
                "2020-02-17T16:32:39.023915", "updated_at":
@@ -180,8 +180,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(my_base.last_name), str)
 
     def test_init(self):
-        """Test __init__
-        """
+        """Test __init__"""
         base = BaseModel()
         self.assertTrue(hasattr(base, "id"))
         self.assertTrue(hasattr(base, "created_at"))
