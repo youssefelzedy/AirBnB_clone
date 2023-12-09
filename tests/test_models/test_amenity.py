@@ -24,5 +24,6 @@ class Testamenity(unittest.TestCase):
         amenityy = Amenity()
         self.assertTrue(issubclass(amenityy.__class__, BaseModel))
 
+
 if __name__ == '__main__':
     unittest.main()

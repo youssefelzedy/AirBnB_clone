@@ -75,7 +75,6 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(AttributeError):
             models.storage.new(None)
 
-
     def test_save(self):
         obj = models.base_model.BaseModel()
         models.storage.new(obj)
