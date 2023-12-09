@@ -35,70 +35,75 @@ class HBNBCommand(cmd.Cmd):
         """
         Creates a new instance of BaseModel, saves it, and prints the id
         """
-        if not arg:
+        args = shlex.split(arg)
+        if len(args) == 0:
             print("** class name missing **")
+            return
         else:
             try:
-                new_instance = eval(arg)()
-                new_instance.save()
-                print(new_instance.id)
-            except NameError:
+                new_instance = models.classes_dict[args[0]]
+            except KeyError:
                 print("** class doesn't exist **")
+                return
+        print(new_instance().id)
+        models.storage.save()
 
     def do_show(self, arg):
         """
         Prints the string representation of an instance
         """
-        if not arg:
+        args = shlex.split(arg)
+        obj_dict = models.storage.all()
+        if len(args) == 0:
             print("** class name missing **")
-        else:
-            args = arg.split()
-            class_name = args[0]
-            if not hasattr(models, class_name):
-                print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
-            else:
-                key = args[0] + "." + args[1]
-                if key in models.storage.all():
-                    print(models.storage.all()[key])
-                else:
-                    print("** no instance found **")
+            return
+        if args[0] not in models.classes_dict:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        if args[0] + '.' + args[1] not in obj_dict:
+            print("** no instance found **")
+            return
+        print(obj_dict[args[0] + '.' + args[1]])
 
     def do_destroy(self, arg):
         """
         Deletes an instance based on the class name and id
         """
-        if not arg:
+        args = shlex.split(arg)
+        obj_dict = models.storage.all()
+        if len(args) == 0:
             print("** class name missing **")
-        else:
-            args = arg.split()
-            class_name = args[0]
-            if not hasattr(models, class_name):
-                print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
-            else:
-                key = args[0] + "." + args[1]
-                if key in models.storage.all():
-                    del models.storage.all()[key]
-                    models.storage.save()
-                else:
-                    print("** no instance found **")
+            return
+        if args[0] not in models.classes_dict:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        if args[0] + '.' + args[1] not in obj_dict:
+            print("** no instance found **")
+            return
+        del obj_dict[args[0] + '.' + args[1]]
+        models.storage.save()
 
     def do_all(self, arg):
         """
         Prints all string representation of all instances
         """
-        if not arg:
-            print([str(value) for value in models.storage.all().values()])
-        else:
-            class_name = arg.split()[0]
-        if hasattr(models, class_name):
-            print([str(value) for key,
-                   value in models.storage.all().items() if class_name in key])
-        else:
+        args = shlex.split(arg)
+        if len(args) != 0 and args[0] not in models.classes_dict:
             print("** class doesn't exist **")
+            return
+        obj_list = []
+        for obj in models.storage.all().values():
+            if len(args) == 0:
+                obj_list.append(obj.__str__())
+            elif args[0] == obj.__class__.__name__:
+                obj_list.append(obj.__str__())
+        print(obj_list)
 
     def do_update(self, arg):
         """
