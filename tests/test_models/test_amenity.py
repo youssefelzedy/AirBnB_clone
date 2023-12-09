@@ -10,19 +10,15 @@ class Testamenity(unittest.TestCase):
     unittests for Amenity class
     """
 
-    def test_class(self):
-        """
-        Tests if the class is named correctly.
-        """
-        amenityy = Amenity()
-        self.assertEqual(amenityy.__class__.__name__, "Amenity")
+    def setUp(self):
+        self.model = Amenity()
+        self.model_dict = self.model.to_dict()
 
-    def test_class2(self):
-        """
-        Tests if class inherits from BaseModel.
-        """
-        amenityy = Amenity()
-        self.assertTrue(issubclass(amenityy.__class__, BaseModel))
+    def test_instantiation(self):
+        self.assertIsInstance(self.model, Amenity)
+
+    def test_attr_empty_string(self):
+        self.assertEqual(self.model.name, "")
 
 
 if __name__ == '__main__':
