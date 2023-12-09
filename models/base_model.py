@@ -38,7 +38,6 @@ class BaseModel(cmd.Cmd):
         ''' return a dictionary with created_at and updated_at '''
         my_dict = self.__dict__.copy()
         my_dict['__class__'] = self.__class__.__name__
-        for key, value in my_dict.items():
-            if isinstance(value, datetime):
-                my_dict[key] = value.strftime(timedate)
+        my_dict["created_at"] = self.created_at.isoformat()
+        my_dict["updated_at"] = self.updated_at.isoformat()
         return my_dict
