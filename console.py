@@ -27,6 +27,10 @@ class HBNBCommand(cmd.Cmd):
         print()  # Print a new line before exiting
         return True
 
+    def emptyline(self):
+        """Do nothing if line is empty"""
+        pass
+
     def do_create(self, arg):
         """
         Creates a new instance of BaseModel, saves it, and prints the id
