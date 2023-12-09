@@ -119,3 +119,7 @@ class TestFileStorage_methods(unittest.TestCase):
                 "{}.{}".format(obj.__class__.__name__, obj.id),
                 models.storage.all()
         )
+
+
+if __name__ == '__main__':
+    unittest.main()
