@@ -41,3 +41,7 @@ class TestConsole(unittest.TestCase):
         self.assertTrue(issubclass(statee.__class__, BaseModel))
         self.assertTrue(issubclass(revieww.__class__, BaseModel))
         self.assertTrue(issubclass(placee.__class__, BaseModel))
+
+
+if __name__ == '__main__':
+    unittest.main()
