@@ -31,13 +31,13 @@ class FileStorage:
         new_dict = {}
         for key, value in self.__objects.items():
             new_dict[key] = value.to_dict()
-        with open(self.__file_path, "w", encoding="utf-8") as f:
+        with open(self.__file_path, "w") as f:
             json.dump(new_dict, f)
 
     def reload(self):
         """deserializes the JSON file to __objects"""
         try:
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            with open(FileStorage.__file_path, "r") as f:
                 obj_load = json.load(f)
                 for val in obj_load.values():
                     self.new(eval(val["__class__"])(**val))
