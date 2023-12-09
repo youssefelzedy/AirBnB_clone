@@ -35,16 +35,19 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        try:
-            new_instance = models.classes_dict[args[0]]
-        except KeyError:
-            print("** class doesn't exist **")
-            return
+        else:
+            try:
+                new_instance = models.classes_dict[args[0]]
+            except KeyError:
+                print("** class doesn't exist **")
+                return
         print(new_instance().id)
         models.storage.save()
 
     def do_show(self, arg):
-        """Prints the string representation of an instance"""
+        """Prints the string representation of an instance
+        based on the class name and id.
+        Usage: show <class name> <id>"""
         args = shlex.split(arg)
         obj_dict = models.storage.all()
         if len(args) == 0:
@@ -62,7 +65,9 @@ class HBNBCommand(cmd.Cmd):
         print(obj_dict[args[0] + '.' + args[1]])
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id"""
+        """Deletes an instance based on the class name and id
+        (saves the change into the JSON file).
+        Usage: destroy <class name> <id>"""
         args = shlex.split(arg)
         obj_dict = models.storage.all()
         if len(args) == 0:
@@ -96,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """
-        Updates an instance based on the class name and\
+        Updates an instance based on the class name and.
         id by adding or updating attribute
         """
         args = shlex.split(arg)
