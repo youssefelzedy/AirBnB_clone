@@ -110,31 +110,31 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and\
         id by adding or updating attribute
         """
-        if not arg:
+        args = shlex.split(arg)
+        obj_dict = models.storage.all()
+        if len(args) < 1:
             print("** class name missing **")
+            return
+        elif args[0] not in models.classes_dict:
+            print("** class doesn't exist **")
+            return
+        elif len(args) < 2:
+            print("** instance id missing **")
+            return
+        elif args[0] + '.' + args[1] not in obj_dict:
+            print("** no instance found **")
+            return
+        elif len(args) < 3:
+            print("** attribute name missing **")
+            return
+        elif len(args) < 4:
+            print("** value missing **")
+            return
         else:
-            args = shlex.split(arg)
-            args_size = len(args)
-            if args_size == 0:
-                print('** class name missing **')
-            elif args[0] not in self.allowed_classes:
-                print("** class doesn't exist **")
-            elif args_size == 1:
-                print('** instance id missing **')
-            else:
-                key = args[0] + '.' + args[1]
-                inst_data = models.storage.all().get(key)
-                if inst_data is None:
-                    print('** no instance found **')
-                elif args_size == 2:
-                    print('** attribute name missing **')
-                elif args_size == 3:
-                    print('** value missing **')
-                else:
-                    args[3] = self.analyze_parameter_value(args[3])
-                    setattr(inst_data, args[2], args[3])
-                    setattr(inst_data, 'updated_at', datetime.now())
-                    models.storage.save()
+            obj = obj_dict[args[0] + '.' + args[1]]
+            attr = type(getattr(obj, args[2]), '')
+            setattr(obj, args[2], attr(args[3]))
+            obj.save()
 
 
 if __name__ == '__main__':
