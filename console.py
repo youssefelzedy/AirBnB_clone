@@ -5,7 +5,9 @@ Console module for HBNB project
 
 import cmd
 import models
+import shlex
 from models.base_model import BaseModel
+from datetime import datetime
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -101,23 +103,27 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         else:
-            args = arg.split()
-            class_name = args[0]
-            if class_name not in models.storage._FileStorage__objects:
+            args = shlex.split(arg)
+            args_size = len(args)
+            if args_size == 0:
+                print('** class name missing **')
+            elif args[0] not in self.allowed_classes:
                 print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
+            elif args_size == 1:
+                print('** instance id missing **')
             else:
-                key = args[0] + "." + args[1]
-                if key not in models.storage._FileStorage__objects:
-                    print("** no instance found **")
-                elif len(args) == 2:
-                    print("** attribute name missing **")
-                elif len(args) == 3:
-                    print("** value missing **")
+                key = args[0] + '.' + args[1]
+                inst_data = models.storage.all().get(key)
+                if inst_data is None:
+                    print('** no instance found **')
+                elif args_size == 2:
+                    print('** attribute name missing **')
+                elif args_size == 3:
+                    print('** value missing **')
                 else:
-                    instance = models.storage._FileStorage__objects[key]
-                    setattr(instance, args[2], eval(args[3]))
+                    args[3] = self.analyze_parameter_value(args[3])
+                    setattr(inst_data, args[2], args[3])
+                    setattr(inst_data, 'updated_at', datetime.now())
                     models.storage.save()
 
 if __name__ == '__main__':
