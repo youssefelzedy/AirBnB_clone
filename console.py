@@ -104,20 +104,21 @@ class HBNBCommand(cmd.Cmd):
             args = arg.split()
             if args[0] not in models.classes:
                 print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
             else:
-                key = args[0] + "." + args[1]
-                if key not in models.storage.all():
-                    print("** no instance found **")
-                elif len(args) == 2:
-                    print("** attribute name missing **")
-                elif len(args) == 3:
-                    print("** value missing **")
+                if len(args) == 1:
+                    print("** instance id missing **")
                 else:
-                    instance = models.storage.all()[key]
-                    setattr(instance, args[2], eval(args[3]))
-                    models.storage.save()
+                    key = args[0] + "." + args[1]
+                    if key not in models.storage.all():
+                        print("** no instance found **")
+                    elif len(args) == 2:
+                        print("** attribute name missing **")
+                    elif len(args) == 3:
+                        print("** value missing **")
+                    else:
+                        instance = models.storage.all()[key]
+                        setattr(instance, args[2], eval(args[3]))
+                        models.storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
