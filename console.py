@@ -126,7 +126,7 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             obj = obj_dict[args[0] + '.' + args[1]]
-            attr = type(getattr(obj, args[2]), '')
+            attr = type(getattr(obj, args[2], ''))
             setattr(obj, args[2], attr(args[3]))
             obj.save()
 
