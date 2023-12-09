@@ -27,7 +27,7 @@ class BaseModel(cmd.Cmd):
     def __str__(self):
         ''' __str_method '''
         return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        self.id, self.__dict__)
 
     def save(self):
         ''' save method '''
@@ -38,6 +38,7 @@ class BaseModel(cmd.Cmd):
         ''' return a dictionary with created_at and updated_at '''
         my_dict = self.__dict__.copy()
         my_dict['__class__'] = self.__class__.__name__
-        my_dict["created_at"] = self.created_at.isoformat()
-        my_dict["updated_at"] = self.updated_at.isoformat()
+        for key, value in my_dict.items():
+            if isinstance(value, datetime):
+                my_dict[key] = value.strftime(timedate)
         return my_dict
