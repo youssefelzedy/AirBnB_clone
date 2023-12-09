@@ -14,19 +14,25 @@ class Testplace(unittest.TestCase):
     unittests for Place class
     """
 
-    def test_class(self):
-        """
-        Tests if the class is named correctly.
-        """
-        placee = Place()
-        self.assertEqual(placee.__class__.__name__, "Place")
+    def setUp(self):
+        self.model = Place()
+        self.model_dict = self.model.to_dict()
 
-    def test_class2(self):
-        """
-        Tests if class inherits from BaseModel.
-        """
-        placee = Place()
-        self.assertTrue(issubclass(placee.__class__, BaseModel))
+    def test_instantiation(self):
+        self.assertIsInstance(self.model, Place)
+
+    def test_attr_empty_string(self):
+        self.assertEqual(self.model.city_id, "")
+        self.assertEqual(self.model.user_id, "")
+        self.assertEqual(self.model.name, "")
+        self.assertEqual(self.model.description, "")
+        self.assertEqual(self.model.number_rooms, 0)
+        self.assertEqual(self.model.number_bathrooms, 0)
+        self.assertEqual(self.model.max_guest, 0)
+        self.assertEqual(self.model.price_by_night, 0)
+        self.assertEqual(self.model.latitude, 0.0)
+        self.assertEqual(self.model.longitude, 0.0)
+        self.assertEqual(self.model.amenity_ids, [])
 
 
 if __name__ == '__main__':

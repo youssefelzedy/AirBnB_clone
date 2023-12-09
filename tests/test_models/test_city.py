@@ -14,19 +14,19 @@ class Testcity(unittest.TestCase):
     unittests for city class
     """
 
-    def test_class(self):
-        """
-        Tests if the class is named correctly.
-        """
-        cityy = City()
-        self.assertEqual(cityy.__class__.__name__, "City")
+class TestCity(unittest.TestCase):
+    """Unittest for testing the City class."""
 
-    def test_class2(self):
-        """
-        Tests if class inherits from BaseModel.
-        """
-        cityy = City()
-        self.assertTrue(issubclass(cityy.__class__, BaseModel))
+    def setUp(self):
+        self.model = City()
+        self.model_dict = self.model.to_dict()
+
+    def test_instantiation(self):
+        self.assertIsInstance(self.model, City)
+
+    def test_attr_empty_string(self):
+        self.assertEqual(self.model.state_id, "")
+        self.assertEqual(self.model.name, "")
 
 
 if __name__ == '__main__':
