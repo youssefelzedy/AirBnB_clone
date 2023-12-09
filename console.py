@@ -35,12 +35,11 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        else:
-            try:
-                new_instance = models.classes_dict[args[0]]
-            except KeyError:
-                print("** class doesn't exist **")
-                return
+        try:
+            new_instance = models.classes_dict[args[0]]
+        except KeyError:
+            print("** class doesn't exist **")
+            return
         print(new_instance().id)
         models.storage.save()
 
