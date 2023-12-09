@@ -27,7 +27,7 @@ class BaseModel(cmd.Cmd):
     def __str__(self):
         ''' __str_method '''
         return "[{}] ({}) {}".format(self.__class__.__name__,
-                                         self.id, self.__dict__)
+                                     self.id, self.__dict__)
 
     def save(self):
         ''' save method '''
