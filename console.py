@@ -9,6 +9,7 @@ import shlex
 from models.base_model import BaseModel
 from datetime import datetime
 
+
 class HBNBCommand(cmd.Cmd):
     """
     HBNBCommand class for command interpreter
@@ -92,13 +93,15 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name = arg.split()[0]
         if hasattr(models, class_name):
-            print([str(value) for key, value in models.storage.all().items() if class_name in key])
+            print([str(value) for key,
+                   value in models.storage.all().items() if class_name in key])
         else:
             print("** class doesn't exist **")
 
     def do_update(self, arg):
         """
-        Updates an instance based on the class name and id by adding or updating attribute
+        Updates an instance based on the class name and\
+        id by adding or updating attribute
         """
         if not arg:
             print("** class name missing **")
@@ -125,6 +128,7 @@ class HBNBCommand(cmd.Cmd):
                     setattr(inst_data, args[2], args[3])
                     setattr(inst_data, 'updated_at', datetime.now())
                     models.storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
