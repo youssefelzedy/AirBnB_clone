@@ -27,3 +27,6 @@ class Teststate(unittest.TestCase):
         """
         statee = State()
         self.assertTrue(issubclass(statee.__class__, BaseModel))
+
+if __name__ == '__main__':
+    unittest.main()

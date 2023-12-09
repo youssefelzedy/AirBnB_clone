@@ -27,3 +27,6 @@ class Testreview(unittest.TestCase):
         """
         revieww = Review()
         self.assertTrue(issubclass(revieww.__class__, BaseModel))
+
+if __name__ == '__main__':
+    unittest.main()

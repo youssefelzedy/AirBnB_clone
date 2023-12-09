@@ -27,3 +27,6 @@ class Testcity(unittest.TestCase):
         """
         cityy = City()
         self.assertTrue(issubclass(cityy.__class__, BaseModel))
+
+if __name__ == '__main__':
+    unittest.main()

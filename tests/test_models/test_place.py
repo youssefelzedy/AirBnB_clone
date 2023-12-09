@@ -27,3 +27,6 @@ class Testplace(unittest.TestCase):
         """
         placee = Place()
         self.assertTrue(issubclass(placee.__class__, BaseModel))
+
+if __name__ == '__main__':
+    unittest.main()
