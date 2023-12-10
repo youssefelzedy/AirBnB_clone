@@ -14,7 +14,6 @@ Welcome to the AirBnB Clone project! This is the first step in building a full w
     ./console.py
     ```
 
-
 ## Examples
 ```bash
 $ ./console.py
