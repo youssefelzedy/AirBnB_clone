@@ -91,13 +91,12 @@ class HBNBCommand(cmd.Cmd):
         if len(args) != 0 and args[0] not in models.classes_dict:
             print("** class doesn't exist **")
             return
-
-        if len(args) == 0:
-            obj_list = [str(obj) for obj in models.classes_dict.values()]
-        else:
-            obj_class = models.classes_dict[args[0]]
-            obj_list = [str(obj) for obj in obj_class.all().values()]
-
+        obj_list = []
+        for obj in models.storage.all().values():
+            if len(args) == 0:
+                obj_list.append(obj.__str__())
+            elif args[0] == obj.__class__.__name__:
+                obj_list.append(obj.__str__())
         print(obj_list)
 
     def do_update(self, arg):
