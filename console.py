@@ -87,29 +87,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints all string representation of all instances"""
-        tokens_a = shlex.split(argument)
-        instance_list = []
-        instance_dict = models.storage.all()
-        if len(tokens_a) == 0:
-            for key in instance_dict:
-                representation_class = str(instance_dict[key])
-                instance_list.append(representation_class)
-            if instance_list:
-                print(instance_list)
-            return
-
-        if tokens_a[0] not in models.classes_dict:
+        args = shlex.split(arg)
+        if len(args) != 0 and args[0] not in models.classes_dict:
             print("** class doesn't exist **")
             return
-        else:
-            representation_class = ""
-            for key in instance_dict:
-                class_name = key.split('.')
-                if class_name[0] == tokens_a[0]:
-                    representation_class = str(instance_dict[key].to_dict())
-                    instance_list.append(representation_class)
-            if instance_list:
-                print(instance_list)
+        obj_list = []
+        for obj in models.storage.all().values():
+            if len(args) == 0:
+                obj_list.append(obj.__str__())
+            elif args[0] == obj.__class__.__name__:
+                obj_list.append(obj.__str__())
+        print(obj_list)
 
     def do_update(self, arg):
         """
