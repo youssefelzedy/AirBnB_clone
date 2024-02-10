@@ -42,6 +42,13 @@ button:hover
     display: unset;
     margin: 7px 0;
     text-align: left;
+    position: relative;
+}
+
+.locations:hover .popover,
+.amenities:hover .popover
+{
+    opacity: 100%;
 }
 
 .locations h3 
@@ -61,14 +68,14 @@ button:hover
 .amenities
 {
     height: 100%;
-    width: 25%;
-    padding: 0 10px;
-    align-items: center;
-    display: unset;
+    width: 18%;
+    padding: 0 50px;
+    align-items: left;
     display: unset;
     text-align: left;
-    margin-right: 100px;
+    margin-right: 140px;
 
+    position: relative;
 }
 
 .amenities h3 
@@ -84,3 +91,29 @@ button:hover
     margin-top: 0px;
 }
 
+.locations .popover,
+.amenities .popover
+{
+    background-color: #FAFAFA;
+
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.popover li a{
+    text-decoration: none;
+    color: #000000;
+
+}
+
+.popover ul{
+    list-style-type: none;
+}
